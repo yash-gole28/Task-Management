@@ -1,0 +1,68 @@
+.App {
+  text-align: center;
+}
+
+.name{
+  text-transform: uppercase;
+  margin-right: 20px;
+  padding: 5px 10px;
+  border-radius: 8px 12px ;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #c8d9f9;
+  font-weight: 700;
+  color: #993d3d;
+}
+
+.form{
+  width: 50%;
+  margin: 15% auto ;
+}
+
+.button{
+  margin: 50px;
+}
+
+.home-title{
+  background-color: #dce7fd;
+  display: inline-block;
+  padding: 15px 20px;
+  border-radius: 12px 8px;
+}
+.home{
+  margin: 10%;
+}
+
+.list-background{
+  background-color: #c9e8f0;
+  margin: 4px 0px;
+  border-radius: 5px 10px 15px 12px;
+  border: 4px solid rgb(20, 15, 15);
+}
+
+
+
+
+
+
+
+
+
+
+
+/* .App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+} */
+
+.App-link {
+  color: #61dafb;
+  
+}
+
+

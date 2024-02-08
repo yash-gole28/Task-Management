@@ -12,7 +12,7 @@ const Navbar = () => {
     if (state?.user !== undefined) {
 
       if (state?.user?.type === 'admin') {
-
+        // console.log(state)
         setAdmin(true)
       }
     }

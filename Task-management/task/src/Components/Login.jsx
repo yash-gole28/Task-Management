@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from './Context/AuthContext'
@@ -19,7 +19,7 @@ const Login = () => {
                 if (response.data.success) {
                     localStorage.setItem('my-token', JSON.stringify(response.data.token))
                     Login(response.data.user)
-                    console.log(response.data)
+                    // console.log(response.data.user)
                     navigate('/')
                     toast.success(response.data.message)
                 }
@@ -28,6 +28,8 @@ const Login = () => {
             console.log(error)
         }
     }
+    useEffect(()=>{
+    },[])
 
     return (
         <div className='form'>
@@ -41,7 +43,7 @@ const Login = () => {
             </form> */}
 
             <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email" onChange={handleChange} />
+                <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" name="email" onChange={handleChange} />
                 <label for="floatingInput">Email address</label>
             </div>
             <div class="form-floating">

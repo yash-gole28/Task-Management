@@ -47,6 +47,7 @@ const Tasks = () => {
           <th scope="col">UserName</th>
           <th scope="col">Priority</th>
           <th scope="col">Due Date</th>
+          <th scope="col">Completed</th>
         </tr>
       </thead>
       {task.map((data , index)=>(
@@ -57,6 +58,7 @@ const Tasks = () => {
            <td className='capitalize'>{data.name}</td>
            <td>{data.Priority}</td>
            <td>{data.DueDate}</td>
+           <td>{data.completed}</td>
            <td onClick={()=>navigate(`/update/${data._id}`)}> <Button  text = "edit"/> </td>
          
          </tr>

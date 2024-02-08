@@ -13,24 +13,58 @@ const MyTasks = () => {
         const response = await axios.post('http://localhost:8000/api/v1/tasks/get-task',{id})
         if(response.data.success){
             setTask(response.data.tasks)
-            console.log(response.data.tasks.length)
             if(response.data.tasks.length === 0){
-              toast("there is no task for you yet")
+              toast("no tasks assigned yet")
               navigate('/')
             }
-            // console.log(task)
+           
         }else{
           toast("there is no task for you yet")
+          navigate('/')
           
         }
+      
     }catch(error){
         console.log(error)
         toast.error(error.response.data.message)
     }
     },[task , setTask])
+
+    const toggleCheck = (index) => {
+      const updatedTasks = task.map((item, i) => {
+        if (i === index) {
+          return {
+            ...item,
+            isChecked: !item.isChecked,
+            completed: !item.isChecked ? 'true' : 'false',
+          };
+        }
+        
+        return item;
+      });
+      setTask(updatedTasks);
+    };
+
+    const updateTask =async(index) =>{
+      try{
+        const tasks = task[index]
+        console.log(tasks , "updating") 
+        const response = await axios.post('http://localhost:8000/api/v1/tasks/update',{tasks})
+        if(response.data.success){
+          toast.success("task updated")
+        }else{
+          toast.error("unable to update task")
+        }
+      }catch(error){
+        toast.error("error")
+        console.log(error)
+      }
+    }
+    
     useEffect(()=>{
-        if(state?.user !== undefined){
+        if(state?.user?.id !== undefined){
             myTasks(state?.user?.id)
+            // console.log(state.user)
         }
     },[state])
 
@@ -59,15 +93,16 @@ const MyTasks = () => {
            {/* <td>{data._id}</td> */}
            <td>{data.Priority}</td>
            <td>{data.DueDate}</td>
-           <td> <input type="checkbox" name="" id="" /> </td>
+           <td> <input type="checkbox" name="completed" id="" onChange={()=>toggleCheck(index)} /> {data.isChecked ? <span className='btn btn-primary' onClick={()=>updateTask(index)}> submit</span> : 
+            <span className='btn btn-danger' onClick={()=>updateTask(index)}> submit</span>} </td>
          
          </tr>
         
        </tbody>
       ))}
      
-    </table> : <div style={{display:"flex",alignItems:"center",justifyContent:'center',height:"400px"}}>Loading <div class="spinner-border text-primary" role="status">
-  <span class="visually-hidden">Loading...</span>
+    </table> : <div style={{display:"flex",alignItems:"center",justifyContent:'center',height:"400px"}}>Loading <div className="spinner-border text-primary" role="status">
+  <span className="visually-hidden">Loading...</span>
 </div></div>  
     }
 

@@ -41,6 +41,7 @@ const Navbar = () => {
 
             {state?.user ? <span className='name'>{state?.user?.type} : {state?.user?.name}</span> : <span className='name'>Unknown</span>}
             {state?.user ? <button className='btn bg-danger' onClick={Logout} >Logout</button> : <button className='btn btn-success' onClick={() => navigate('/login')}>Login</button>}
+            {state?.user ? <></> : <span onClick={() => { navigate('/register') }} style={{ marginLeft: "10px" }} className='btn btn-success '>Register</span>}
 
           </div>
         </div>

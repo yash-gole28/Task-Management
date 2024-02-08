@@ -1,36 +1,45 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { AuthContext } from './Context/AuthContext'
 import toast from 'react-hot-toast'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const MyTasks = () => {
     const [task , setTask] = useState([])
     const {state} = useContext(AuthContext)
-    async function myTasks(){
-        try{
-            const response = await axios.post('http://localhost:8000/api/v1/tasks/get-task',{id:state?.user?._id})
-            if(response.data.success){
-                setTask(response.data.tasks)
-                toast('your tasks ')
-                // console.log(task)
+    const navigate = useNavigate()
+    const myTasks = useCallback(async (id)=>{
+      try{
+        const response = await axios.post('http://localhost:8000/api/v1/tasks/get-task',{id})
+        if(response.data.success){
+            setTask(response.data.tasks)
+            console.log(response.data.tasks.length)
+            if(response.data.tasks.length === 0){
+              toast("there is no task for you yet")
+              navigate('/')
             }
-        }catch(error){
-            console.log(error)
-            toast.error(error.response.data.message)
-        }
-    }
-    useEffect(()=>{
-        if(state?.user){
-            myTasks()
             // console.log(task)
+        }else{
+          toast("there is no task for you yet")
+          
+        }
+    }catch(error){
+        console.log(error)
+        toast.error(error.response.data.message)
+    }
+    },[task , setTask])
+    useEffect(()=>{
+        if(state?.user !== undefined){
+            myTasks(state?.user?.id)
         }
     },[state])
+
   return (
     <div>
       <h1>here are your tasks</h1>
      
 
-{state?.user ? 
+{task?.length ? 
       <table className="table table-striped">
       <thead>
         <tr>
@@ -57,7 +66,9 @@ const MyTasks = () => {
        </tbody>
       ))}
      
-    </table> : <div>Only Admin have access</div>  
+    </table> : <div style={{display:"flex",alignItems:"center",justifyContent:'center',height:"400px"}}>Loading <div class="spinner-border text-primary" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div></div>  
     }
 
     </div>

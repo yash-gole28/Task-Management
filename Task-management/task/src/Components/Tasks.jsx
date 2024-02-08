@@ -36,7 +36,7 @@ const Tasks = () => {
   return ( 
     <div style={{margin:'1px'}}>
       <h1>
-        Your Tasks
+        All Tasks
       </h1>
       {state?.user?.type === 'admin' ? 
       <table className="table table-striped" >
@@ -44,7 +44,7 @@ const Tasks = () => {
         <tr>
           <th scope="col">#</th>
           <th scope="col">Description</th>
-          <th scope="col">User Id</th>
+          <th scope="col">UserName</th>
           <th scope="col">Priority</th>
           <th scope="col">Due Date</th>
         </tr>
@@ -54,7 +54,7 @@ const Tasks = () => {
          <tr >
            <th scope="row">{index + 1}</th>
            <td>{data.Description}</td>
-           <td>{data._id}</td>
+           <td className='capitalize'>{data.name}</td>
            <td>{data.Priority}</td>
            <td>{data.DueDate}</td>
            <td onClick={()=>navigate(`/update/${data._id}`)}> <Button  text = "edit"/> </td>
@@ -62,11 +62,12 @@ const Tasks = () => {
          </tr>
         
        </tbody>
+       
       ))}
      
     </table> : <div>Only Admin have access</div>  
     }
-     
+     <button onClick={()=>navigate("/assign-task")} className='btn btn-primary'>Assign New Task</button>
     
 
     </div>

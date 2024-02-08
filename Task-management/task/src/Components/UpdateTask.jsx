@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import { AuthContext } from './Context/AuthContext'
 import axios from 'axios'
 import toast from 'react-hot-toast'
@@ -8,10 +8,10 @@ const UpdateTask = () => {
     const {id} = useParams()
     const {state} = useContext(AuthContext)
     const [tasks , setTask] = useState({})
-
+    const navigate = useNavigate()
     // console.log(id)
 
-    async function getTask(){
+    const getTask = useCallback(async()=>{
         try{
             const response =await axios.get(`http://localhost:8000/api/v1/tasks/single?id=${id}`)
             if(response.data.success){
@@ -22,7 +22,7 @@ const UpdateTask = () => {
         }catch(error){
             console.log(error)
         }
-    }
+    },[setTask])
 
     async function handleSubmit(event){
        try{
@@ -30,6 +30,7 @@ const UpdateTask = () => {
         const updateData = await axios.post("http://localhost:8000/api/v1/tasks/update",{tasks})
         if(updateData.data.success){
             toast.success('task updated')
+            navigate("/tasks")
         }
        }catch(error){
         console.log(error)
@@ -37,18 +38,20 @@ const UpdateTask = () => {
     }
     function handleChange(event){
         setTask({...tasks , [event.target.name]:event.target.value})
-        console.log(tasks)
+        // console.log(tasks)
     }
 
     // http://localhost:8000/api/v1/tasks/
 
 useEffect(()=>{
-if(state?.user?.type == 'admin'){
+if(state?.user?.type === 'admin'){
     getTask()
-    // console.log(tasks)
-    
+    // console.log(tasks) 
 }
 },[state])
+useEffect(()=>{
+    console.log("get task complete")
+},[getTask])
   return (
     <div>
       <h1>update task</h1>
@@ -61,9 +64,8 @@ if(state?.user?.type == 'admin'){
         <input type="date"value={tasks.DueDate} name='DueDate' onChange={handleChange}/><br />
         <label htmlFor="">Name</label>
         <input type="text"value={tasks.name} name='name' onChange={handleChange}/>
-        <button type="submit"></button>
+        <button type="submit">Update</button>
       </form>
-        <button onClick={()=>console.log(tasks)}>btn</button>
     </div>
   )
 }

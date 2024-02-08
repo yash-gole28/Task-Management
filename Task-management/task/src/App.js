@@ -10,6 +10,7 @@ import MyTasks from './Components/MyTasks';
 import PasswordGenerator from './Components/PasswordGenerator';
 import UpdateTask from './Components/UpdateTask';
 import SingleTask from './Components/SingleTask';
+import AssignTask from './Components/AssignTask';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
       <Route path='/password' element={<PasswordGenerator/>}/>
       <Route path='/update/:id' element={<UpdateTask/>}/>
       <Route path='/task/:id' element={<SingleTask/>}/>
+      <Route path='/assign-task' element={<AssignTask/>}/>
 
       
       

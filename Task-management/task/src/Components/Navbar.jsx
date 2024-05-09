@@ -34,6 +34,9 @@ const Navbar = () => {
                 {admin ? <span onClick={() => { navigate('/tasks') }} className='nav-link'>All Tasks</span> : <span className='nav-link ' onClick={() => { toast.error('only Admin have Access') }}>All Tasks</span>}
               </li>
               <li className="nav-item">
+                {admin ? <span onClick={() => { navigate('/assign-task') }} className='nav-link'>Assign Tasks</span> : <span className='nav-link ' onClick={() => { toast.error('only Admin have Access') }}>All Tasks</span>}
+              </li>
+              <li className="nav-item">
                 {!admin ? <span onClick={() => { navigate('/mytasks') }} className='nav-link'>My Tasks</span> : <span className='nav-link ' onClick={() => { toast.error('this page is for users') }}>My Tasks</span>}
               </li>
 

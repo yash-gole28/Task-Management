@@ -55,7 +55,7 @@ useEffect(()=>{
   return (
     <div>
       <h1>update task</h1>
-      <form onSubmit={handleSubmit}>
+      <form className='align-vertical' onSubmit={handleSubmit}>
         <label htmlFor="">Description</label>
         <input type="text"value={tasks.Description} name='Description' onChange={handleChange}/><br />
         <label htmlFor="">Priority</label>
@@ -63,8 +63,8 @@ useEffect(()=>{
         <label htmlFor="">DueDate</label>
         <input type="date"value={tasks.DueDate} name='DueDate' onChange={handleChange}/><br />
         <label htmlFor="">Name</label>
-        <input type="text"value={tasks.name} name='name' onChange={handleChange}/>
-        <button type="submit">Update</button>
+        <input type="text"value={tasks.name} name='name' onChange={handleChange}/><br />
+        <button type="submit" className='btn btn-primary'>Update</button>
       </form>
     </div>
   )

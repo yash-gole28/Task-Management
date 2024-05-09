@@ -12,7 +12,8 @@ const AssignTask = () => {
     
     const handleChange = useCallback((event)=>{
       setData({...data,[event.target.name]:event.target.value})
-      console.log(data)
+      // console.log(state.state.user.id)
+      console.log(state?.user?.id)
   },[setData , data])
 
 
@@ -32,16 +33,17 @@ const AssignTask = () => {
        }
       }catch(error){
         console.log(error)
+        toast.error(error.response.data.message)
       }
     }
-    useEffect(()=>{
-        if(state?.user?.type === "admin"){
-            // const newData = {...data,userId:`${state.user.id}`}
-        }
-    },[state])
+    // useEffect(()=>{
+    //     if(state?.user?.type === "admin"){
+    //         // const newData = {...data,userId:`${state.user.id}`}
+    //     }
+    // },[state])
   return (
     <>
-    <form onSubmit={handleSubmit}>
+    <form className='align-vertical' onSubmit={handleSubmit}>
         <label htmlFor="">Description</label>
         <input type="text" name='Description' onChange={handleChange}/><br />
         <label htmlFor="">Priority</label>
@@ -49,8 +51,8 @@ const AssignTask = () => {
         <label htmlFor="">DueDate</label>
         <input type="date" name='DueDate' onChange={handleChange}/><br />
         <label htmlFor="">Name</label>
-        <input type="text" name='name' onChange={handleChange}/>
-        <button type="submit">Update</button>
+        <input type="text" name='name' onChange={handleChange}/><br />
+        <button type="submit" className='btn btn-primary'>Assign</button>
       </form>
     </>
   )

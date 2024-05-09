@@ -33,14 +33,6 @@ const Login = () => {
 
     return (
         <div className='form'>
-            {/* <form action="" onSubmit={sendDataToBackend}>
-                <label htmlFor="">Email :</label>
-                <input className="inputs" type="email" name="email" onChange={handleChange} id="" />
-                <label htmlFor="">Password :</label>
-                <input className="inputs" type="password" name="password" onChange={handleChange} id="" />
-                <br />
-                <input className="button" type="submit" value="login" />
-            </form> */}
 
             <div class="form-floating mb-3">
                 <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" name="email" onChange={handleChange} />
